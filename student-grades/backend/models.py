@@ -12,8 +12,8 @@ class Student(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     roll_number: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
-    test1: Mapped[float] = mapped_column(Float, nullable=False)
-    test2: Mapped[float] = mapped_column(Float, nullable=False)
+    quiz1: Mapped[float] = mapped_column(Float, nullable=False)
+    quiz2: Mapped[float] = mapped_column(Float, nullable=False)
     midsem: Mapped[float] = mapped_column(Float, nullable=False)
     endsem: Mapped[float] = mapped_column(Float, nullable=False)
     created_at: Mapped[datetime] = mapped_column(

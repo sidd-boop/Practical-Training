@@ -22,12 +22,12 @@ app = FastAPI(title="Student Grade Calculator", lifespan=lifespan)
 
 def to_out(s: Student) -> StudentOut:
     """Final score and grade are computed on read, so they always match current weights."""
-    score = grading.calculate_final_score(s.test1, s.test2, s.midsem, s.endsem)
+    score = grading.calculate_final_score(s.quiz1, s.quiz2, s.midsem, s.endsem)
     return StudentOut(
         roll_number=s.roll_number,
         name=s.name,
-        test1=s.test1,
-        test2=s.test2,
+        quiz1=s.quiz1,
+        quiz2=s.quiz2,
         midsem=s.midsem,
         endsem=s.endsem,
         final_score=score,
@@ -51,9 +51,14 @@ def health():
 def config():
     return {
         "weights": {
-            "tests (avg of test1 & test2)": grading.WEIGHT_TESTS,
-            "midsem": grading.WEIGHT_MIDSEM,
-            "endsem": grading.WEIGHT_ENDSEM,
+            "Quizzes (Avg of Quiz 1 & Quiz 2)": grading.WEIGHT_QUIZZES,
+            "Midsem": grading.WEIGHT_MIDSEM,
+            "Endsem": grading.WEIGHT_ENDSEM,
+        },
+        "max_marks": {
+            "quiz": grading.QUIZ_MAX,
+            "midsem": grading.MIDSEM_MAX,
+            "endsem": grading.ENDSEM_MAX,
         },
         "grade_scale": [{"min_score": m, "grade": g} for m, g in grading.GRADE_SCALE],
     }
